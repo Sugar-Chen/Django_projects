@@ -1,0 +1,16 @@
+<!Doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+</head>
+<body>
+<h1>{{book.btitle}}</h1>
+<ul>
+{% for i in hero %}
+<li>{{i}}--{{i.hcomment}}</li>
+{%empty%}
+<li>无数据</li>
+{% endfor %}
+</ul>
+</body>
+</html>
