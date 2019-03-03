@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load filter %}
+<head>
+    <meta charset="UTF-8">
+    <title>自定义过滤器</title>
+</head>
+<body>
+
+<h1>自定义过滤器</h1>
+<ul>
+    
+    {% for book in list %}
+    	{% if book.id|mod_value:3 %}
+    	<li style="color:red;">{{book.btitle}}</li>
+    	{% else %}
+    	<li style="color:green;">{{book.btitle}}</li>
+	{% endif %}
+    {% endfor %}
+    
+</ul>
+</body>
+</html>
