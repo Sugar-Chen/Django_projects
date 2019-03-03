@@ -2,9 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>ajax请求</title>
+    <script src='/static/js/jquery.min.js'></script>
+    <script>
+	$(function(){
+	    $("#myBtn").click(function(){
+		$.ajax({
+		    'url':"/ajax_handel",
+		    'dataType':'json'
+		}).success(function (data) {
+		    alert(data.res)
+		    if(data.res == "cmm"){
+			$("#myDiv").show();
+		    }
+		})
+	    })
+	})
+        
+    </script>
+    <style>
+	#myDiv{display:none;}
+    </style>
 </head>
-<body>
 
+<body>
+<input type = button id="myBtn" value="ajax请求">
+<div id="myDiv" style="color:red">success</div>
 </body>
 </html>

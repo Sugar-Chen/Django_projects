@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax_login</title>
+    <script src='/static/js/jquery.min.js'></script>
+    <script>
+	$(function(){
+	    $("#myBtn").click(function(){
+		name = $("#username").val()
+		pwd = $("#password").val()
+    		if($("#member").is(':checked')){
+		    member = 'on'
+		}else{
+		    member = 'None'
+		}
+		$.ajax({
+		    'url':"/ajax_login_check",//请求的页面
+		    'type':'post',//请求的方式
+		    'data':{'username':name,'password':pwd,'member':member},//传送的数据
+		    'dataType':'json'//预期返回的数据格式
+		}).success(function (data) {//以下是回调函数
+		    if(data.res == 1){
+			$("#myDiv").show();
+			$("#myDiv1").hide();
+		    }else{
+			$("#myDiv1").show();
+			$("#myDiv").hide();
+		    }
+		})
+	    })
+	})
+        
+    </script>
+    <style>
+	#myDiv,#myDiv1{display:none;}
+    </style>
+</head>
+
+<body>
+name:<input type="text" id="username" value="{{username}}">
+password:<input type="password" id="password">
+<input type = "checkbox" id="member">remember name
+<input type = button id="myBtn" value="登录">
+<div id="myDiv" style="color:red">success</div>
+<div id="myDiv1" style="color:red">failed</div>
+</body>
+</html>
