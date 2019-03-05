@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>登录页面</title>
+    
 </head>
 <body>
 
 <form  method="post" action="logincheck">
-    name:<input type="text" name="username">
+    name:<input type="text" name="username" value="{{username}}">
     password:<input type="password" name="password">
+    <input type="checkbox" name="remember">记住用户名
     <input type="submit" value="sumbit">
 </form>
 
