@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load filter %}
+<head>
+    <meta charset="UTF-8">
+    <title>显示地区</title>
+</head>
+<body>
+
+<h1>显示地区</h1>
+<ul>
+    
+    {% for a in area %}
+        <li>{{a.atitle}}</li>
+    {% endfor %}
+    <p></p>
+
+    {% if area.has_previous%}
+    <a href = "/show_area/{{area.previous_page_number}}">&lt;&lt;</a>
+    {% endif %}
+
+    {% for page in range%}
+    {% if page == area.number %}
+        <a>{{page}}&nbsp;&nbsp;</a>
+    {% else %}
+        <a href="/show_area/{{page}}">{{page}}&nbsp;&nbsp;</a>
+    {% endif %}
+    {% endfor %}
+
+    {% if area.has_next%}
+    <a href = "/show_area/{{area.next_page_number}}">&gt;&gt;</a>
+    {% endif %}
+    
+</ul>
+</body>
+</html>

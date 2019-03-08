@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
-from booktest.models import BookInfo
+from booktest.models import BookInfo,PicTest,AreaInfo
+from project_0303 import settings
 from django.http import HttpResponse
 
 #装饰器：用户未登录，有些页面是不能访问的
@@ -66,4 +67,37 @@ def changeover(request):
     #获取session记录用户的名字
     username = request.session.get('username')
     return render(request,'booktest/changeover.html',{"pwd":password,"user":username})
+
+
+def upload(request):
+    return render(request,'booktest/upload_pic.html')
+
+
+def upload_handle(request):
+    pic = request.FILES['pic']
+    save_path = '%s/booktest/%s'%(settings.MEDIA_ROOT,pic.name)
+    with open(save_path,'wb') as f:
+        for content in pic.chunks():
+            f.write(content)
+    PicTest.objects.create(goods_pic='booktest/%s'%pic.name)
+    return HttpResponse('ok')
+
+from django.core.paginator import Paginator
+def show_area(request,page_num):
+    area = AreaInfo.objects.filter(aParent__isnull=True)
+    pp = Paginator(area,10)
+    
+    #nums = pp.num_pages
+    rang = pp.page_range
+
+    if page_num=='':
+        index = 1
+    else:
+        index = int(page_num)
+    content = pp.page(index)
+
+    return render(request,'booktest/show_area.html',{"area":content,"range":rang})
+    
+
+
 
